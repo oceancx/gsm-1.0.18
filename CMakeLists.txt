@@ -1,6 +1,10 @@
 cmake_minimum_required (VERSION 3.10)
 project(GSMDecoder LANGUAGES C CXX)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/dist CACHE PATH "..." FORCE)
+endif()
+
 
 file(GLOB_RECURSE  SOURCES_CPP "src/*.cpp" "src/*.c")
 file(GLOB_RECURSE  SOURCES_HEADER_RPI "src/*.h" )
@@ -43,3 +47,7 @@ target_include_directories(gsm
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+
+
+include(cmake/HelperMacroFunction.cmake)
+export_library_macro(gsm gsm "" lib/cmake/gsm)
